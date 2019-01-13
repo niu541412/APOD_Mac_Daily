@@ -15,5 +15,6 @@ KNOWN ISSUE
 These scripts work by grabbing the link to the big version of an image, however sometimes the APOD people use flash videos or animated gifs instead of a bigger jpeg picture, these obviously don't work so the script doesn't even try to download these, you'll be forced to look at the picture that was already on your desktop.
 
 Updated by me
-# Set back to random wallpapers provided by Mac OS.
-# Send notification when it updates the wallpaper with the name and authors.
+1. Set back to random wallpapers provided by Mac OS.
+2. Send notification when it updates the wallpaper with the name and authors.
+
