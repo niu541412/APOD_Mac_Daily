@@ -1,5 +1,5 @@
 # Apod_Mac_Daily
-## Forked from [Harold's](http://www.haroldbakker.com/personal/apod.php) Scripts.
+## Forked from [Harold](http://www.haroldbakker.com/personal/apod.php)'s Scripts.
 
 Two scripts that work together to download the astronomy picture of the day (also know as [APOD](https://apod.nasa.gov/apod/)) and set it as the current desktop backgrond in Mac OS X.
 
