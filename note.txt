@@ -1,0 +1,61 @@
+
+curl -I "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"
+apodjson=$(curl -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"|json_pp|grep hdurl)
+echo $apodjson|awk -F '"' '{print $4}'
+
+curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"&count=1000"|grep HTTP
+
+https://api.nasa.gov/planetary/apod?api_key=Oujh1w0VJcfGTHzqL9POPrPbZAh1Sz3LY6i6eSD7
+
+
+  curl -i -H "Accept: application/json" -H "Content-Type: application/json" -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY"&count=1000"|grep HTTP
+
+[
+   {
+      "media_type" : "image",
+      "url" : "https://apod.nasa.gov/apod/image/1606/NGC2547ID8_Spitzer_1080.jpg",
+      "service_version" : "v1",
+      "date" : "2016-06-13",
+      "explanation" : "Why does star KIC 8462852 keep wavering?  Nobody knows.  A star somewhat similar to our Sun, KIC 8462852 was one of many distant stars being monitored by NASA's robotic Kepler satellite to see if it had planets. Citizen scientists voluntarily co-inspecting the data along with computers found this unusual case where a star's brightness dropped at unexpected times by as much as 20 percent for as long as months -- but then recovered. Common reasons for dimming -- such as eclipses by orbiting planets or stellar companions -- don't match the non-repetitive nature of the dimmings. A currently debated theory is dimming by a cloud of comets or the remnants of a shattered planet, but these would not explain data indicating that the star itself has become slightly dimmer over the past 125 years.  Nevertheless, featured here is an artist's illustration of a planet breaking up, drawn to depict NGC 2547-ID8, a different system that shows infrared evidence of such a collision. Recent observations of KIC 8462852 did not detect the infrared glow of a closely orbiting dust disk, but gave a hint that the system might have such a disk farther out.  Future observations are encouraged and creative origin speculations are sure to continue.",
+      "hdurl" : "https://apod.nasa.gov/apod/image/1606/NGC2547ID8_Spitzer_4005.jpg",
+      "title" : "Unexplained Dimmings in KIC 8462852"
+   },
+   {
+      "media_type" : "image",
+      "url" : "https://apod.nasa.gov/apod/image/9611/m82_cfa.gif",
+      "title" : "Unusual M82: The Cigar Galaxy\r\nCredit and Copyright:",
+      "explanation" : "Something strange happened to this galaxy,\r but what? M82\r is a nearby galaxy in the group of galaxies\r dominated by itself, M81, and NGC 3077.\r M82 is thought by some to be limping away from a close encounter\r with M81.\r This galactic collision\r might have stirred up the inner stars and gas in M82,\r causing the unusual dark lanes of dust\r visible in the above photograph. M82\r is a starburst galaxy with a very\r active center containing star clusters far brighter\r than any in our own Milky Way Galaxy.\r",
+      "date" : "1996-11-18",
+      "service_version" : "v1",
+      "hdurl" : "https://apod.nasa.gov/apod/image/9611/m82_cfa_big.gif"
+   },
+   {
+      "copyright" : "Ethan Kruse",
+      "url" : "https://www.youtube.com/embed/_DnDeBa0KFc?rel=0",
+      "media_type" : "video",
+      "title" : "Kepler Orrery IV",
+      "service_version" : "v1",
+      "date" : "2015-12-05",
+      "explanation" : "The exoplanet hunting Kepler mission's total for candidate and confirmed multiple planet systems stands at 1,705 worlds in orbit around 685 distant stars.  Put all of those exoplanet orbits on the same scale and follow their relative orbital motions to get Kepler Orrery IV. To make the planets visible, their sizes aren't shown to scale. But orbits of the planets in the Solar System (dashed lines) are included to scale in the hypnotic video. Of course, Kepler uses planetary transits to detect exoplanets, looking for a slight dimming of light as the planet crosses in front of its star. In the time compressed video, Kepler's multiplanet system orbits are all oriented to put observed transits at the three o'clock position. The dervish-like movements highlight a stark contrast between most Kepler-discovered exoplanetary systems and our own. Planning an interstellar vacation? Be sure to check the scale at the upper left first. The color code indicates a planet's estimated equilibrium surface temperature based on its orbit size and parent star."
+   },
+   {
+      "title" : "Venus and Jupiter are Close",
+      "hdurl" : "https://apod.nasa.gov/apod/image/1507/VenusandJupiterareClose_WangLetian.jpg",
+      "explanation" : "On June 30, Venus and Jupiter were close in western skies at dusk. Near the culmination of this year's gorgeous conjunction, the two bright evening planets are captured in the same telescopic field of view in this image taken after sunset from Bejing, China. As the two bright planets set together in the west, a nearly Full Moon rose above the horizon to the south and east. Imaged that night with the same telescope and camera, the rising Moon from the opposite part of the sky is compared with the planetary conjunction for scale in the digitally composited image. The full lunar disk covers an angle of about 1/2 degree on the sky. Visible as well in binoculars and small telescopes are Venus' crescent and Jupiter's four Galilean moons. Of course, Venus and Jupiter are still close.",
+      "date" : "2015-07-02",
+      "service_version" : "v1",
+      "copyright" : "Wang, Letian",
+      "url" : "https://apod.nasa.gov/apod/image/1507/VenusandJupiterareClose_WangLetian1024.jpg",
+      "media_type" : "image"
+   },
+   {
+      "hdurl" : "https://apod.nasa.gov/apod/image/sagneb_aat.gif",
+      "explanation" : "What causes the colors in this beautiful nebulosity in Sagittarius?  Dubbed NGC 6589 and NGC 6590, the colors of this nebulosity, are caused by gas and dust. The blue color of the nebula nearest the bright stars is caused by reflection off interstellar dust. The dust emits little visible light of its own - in the absence of a nearby star the dust would appear dark, blocking light from background stars. The red color of the nebula farthest from the bright stars is caused by glowing hydrogen gas. Energetic light from the central stars ionizes hydrogen gas - which glows red when recombining with a local electron.",
+      "date" : "1997-08-10",
+      "service_version" : "v1",
+      "title" : "Nebulosity in Sagittarius",
+      "url" : "https://apod.nasa.gov/apod/image/sagneb_aat_big.gif",
+      "media_type" : "image",
+      "copyright" : "AAOAATB"
+   }
+]
