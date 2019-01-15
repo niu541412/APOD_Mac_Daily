@@ -24,7 +24,7 @@ if [ $media_type == "video" ]; then
    osascript -e "display notification \"Astronomy Picture of the Day\" with title \"Today is a video, please visit\" subtitle \"$url\" sound name \"Glass\""
    today_is_video=true
 elif [ $media_type == "image" ]; then
-  #curl -o tmp/apod_${date}.jpg ${hdurl}
+  curl -o tmp/apod_${date}.jpg ${hdurl}
   echo "Today is a image, change the wallpaper."
   for ((i=1; i<=${screen_num}; i++))
   do
