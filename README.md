@@ -1,20 +1,16 @@
-# Apod_Mac_Daily
-## Forked from [Harold](http://www.haroldbakker.com/personal/apod.php)'s Scripts.
+# APOD Mac Daily
 
-Two scripts that work together to download the astronomy picture of the day (also know as [APOD](https://apod.nasa.gov/apod/)) and set it as the current desktop backgrond in Mac OS X.
+A script that works together to download the astronomy picture of the day (also know as [APOD](https://apod.nasa.gov/apod/)) and set it as the current desktop wallpaper in Mac OS X.
 
-HOW IT WORKS
-The scripts work by downloading an HTML file, extracting the location of the big version of the daily picture from that and downloading that. That downloaded picture will then be set as the current desktop background using OSAscript, a commandline version of Applescript. After the image file has been set as the current desktop background it will be left in the /tmp directory where you can fish it out for safekeeping if you like.
+## HOW IT WORKS
+The scripts work by requesting the APOD API, extracting the location of the HD version of the daily picture from that and downloading it. That downloaded picture will then be set as the wallpaper using osascript to every desktop and a notification will be sent. After the image file has been set as the current wallpaper it will be left in the ./tmp directory where you can keep if you like. This script will remove the outdated images several days later.
 
-REQUIRES
-Mac OS X
-Perl and curl (should be installed already otherwise install the developerstools)
+You can edit your crontab file to make this script to work automatically and periodically. For example
 
+`#0 12 * * * /Users/username/Pictures/APOD_Mac_Daily/apod_daily.sh`
 
-KNOWN ISSUE
-These scripts work by grabbing the link to the big version of an image, however sometimes the APOD people use flash videos or animated gifs instead of a bigger jpeg picture, these obviously don't work so the script doesn't even try to download these, you'll be forced to look at the picture that was already on your desktop.
+## REQUIREMENT
+Mac OS
 
->Updated by me
->1. Set back to random wallpapers provided by Mac OS.
->2. Send notification when it updates the wallpaper with the name and authors.
-
+## KNOWN ISSUE
+These scripts work by grabbing the link to the big version of an image, however sometimes the APOD people use flash videos or animated gifs instead of a bigger jpeg picture, these obviously don't work so the script doesn't even try to download these.
