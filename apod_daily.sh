@@ -33,7 +33,7 @@ elif [ $media_type == "image" ]; then
     date=$apod_date
     fi
     echo "apod_${date}"
-    osascript -e "tell application \"System Events\"" -e "tell desktop ${i}" -e "set picture to \"$PWD/tmp/apod_${date}.jpg\"" -e "end tell" -e "end tell"
+    osascript -e "tell application \"System Events\"" -e "tell desktop ${i}" -e "set picture rotation to 0" -e "set picture to \"$PWD/tmp/apod_${date}.jpg\"" -e "end tell" -e "end tell"
   done
   osascript -e "display notification \"Astronomy Picture of the Day\" with title \"$title\" subtitle \"$explanation\" sound name \"Glass\""
 else
