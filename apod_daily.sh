@@ -12,6 +12,7 @@ fi
 
 apodjson=$(curl -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
 if [ x$apodjson == "x" ]; then
+<<<<<<< HEAD
   apodjson=$(curl -x 127.0.0.1:1080 -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
 fi
 date=$(echo $apodjson | json_pp | grep date | awk -F '"' '{print $4}')
@@ -20,6 +21,16 @@ title=$(echo $apodjson | json_pp | grep title | awk -F '"' '{print $4}')
 media_type=$(echo $apodjson | json_pp | grep media_type | awk -F '"' '{print $4}')
 hdurl=$(echo $apodjson | json_pp | grep hdurl | awk -F '"' '{print $4}')
 url=$(echo $apodjson | json_pp | grep -w url | awk -F '"' '{print $4}')
+=======
+   apodjson=$(curl -x 127.0.0.1:1080 -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+ fi
+date=$(echo $apodjson|json_pp|grep date|awk -F '"' '{print $4}')
+explanation=$(echo $apodjson|json_pp|grep explanation|awk -F '"' '{print $4}')
+title=$(echo $apodjson|json_pp|grep title|awk -F '"' '{print $4}')
+media_type=$(echo $apodjson|json_pp|grep media_type|awk -F '"' '{print $4}')
+hdurl=$(echo $apodjson|json_pp|grep hdurl|awk -F '"' '{print $4}')
+url=$(echo $apodjson|json_pp|grep -w url|awk -F '"' '{print $4}')
+>>>>>>> c57c0474d940a5399b570317fa9f07ceed449ff1
 apod_date=${date}
 epoch=$(date -j -f "%Y-%m-%d" $apod_date +%s)
 
