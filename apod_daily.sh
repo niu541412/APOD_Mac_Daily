@@ -11,6 +11,9 @@ mkdir tmp
 fi
 
 apodjson=$(curl -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+if [ x$apodjson == "x" ]; then
+   apodjson=$(curl -x 127.0.0.1:1080 -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+ fi
 date=$(echo $apodjson|json_pp|grep date|awk -F '"' '{print $4}')
 explanation=$(echo $apodjson|json_pp|grep explanation|awk -F '"' '{print $4}')
 title=$(echo $apodjson|json_pp|grep title|awk -F '"' '{print $4}')
