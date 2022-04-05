@@ -31,7 +31,7 @@ if [ $media_type == "video" ]; then
   today_is_video=true
 elif [ $media_type == "image" ]; then
   curl -o tmp/apod_${date}.jpg ${hdurl}
-  echo "Today is a image, change the wallpaper."
+  echo "Today is an image, change the wallpaper."
   for ((i = 1; i <= ${screen_num}; i++)); do
     date=$(date -r $(($epoch - (i - 1) * 86400)) +"%Y-%m-%d")
     if [ ! -f "$PWD/tmp/apod_${date}.jpg" ]; then
@@ -42,7 +42,7 @@ elif [ $media_type == "image" ]; then
   done
   osascript -e "display notification \"Astronomy Picture of the Day\" with title \"$title\" subtitle \"$explanation\" sound name \"Glass\""
 else
-  echo "Error! Today APOD is something werid."
+  echo "Error! Today APOD is something weird."
   #do somthing
 fi
 
