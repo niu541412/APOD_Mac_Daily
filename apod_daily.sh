@@ -6,8 +6,16 @@ screen_num=$(osascript -e "tell application \"System Events\" to return count of
 today_is_video=false
 random_apod=false
 
-if [ ! -d "tmp" ]; then
-  mkdir tmp
+if [ -z "$1" ]; then
+  #echo "No argument supplied"
+  TARGETDIR="$PWD/tmp"
+else
+  TARGETDIR="$1"
+fi
+
+
+if [ ! -d "$TARGETDIR" ]; then
+  mkdir $TARGETDIR
 fi
 
 apodjson=$(curl -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
@@ -30,15 +38,15 @@ if [ $media_type == "video" ]; then
   osascript -e "display notification \"Astronomy Picture of the Day\" with title \"Today is a video, please visit\" subtitle \"$url\" sound name \"Glass\""
   today_is_video=true
 elif [ $media_type == "image" ]; then
-  curl -o tmp/apod_${date}.jpg ${hdurl}
+  curl -o $TARGETDIR/apod_${date}.jpg ${hdurl}
   echo "Today is an image, change the wallpaper."
   for ((i = 1; i <= ${screen_num}; i++)); do
     date=$(date -r $(($epoch - (i - 1) * 86400)) +"%Y-%m-%d")
-    if [ ! -f "$PWD/tmp/apod_${date}.jpg" ]; then
+    if [ ! -f "$TARGETDIR/apod_${date}.jpg" ]; then
       date=$apod_date
     fi
     echo "apod_${date}"
-    osascript -e "tell application \"System Events\"" -e "tell desktop ${i}" -e "set picture rotation to 0" -e "set picture to \"$PWD/tmp/apod_${date}.jpg\"" -e "end tell" -e "end tell"
+    osascript -e "tell application \"System Events\"" -e "tell desktop ${i}" -e "set picture rotation to 0" -e "set picture to \"$TARGETDIR/apod_${date}.jpg\"" -e "end tell" -e "end tell"
   done
   osascript -e "display notification \"Astronomy Picture of the Day\" with title \"$title\" subtitle \"$explanation\" sound name \"Glass\""
 else
@@ -47,4 +55,4 @@ else
 fi
 
 #clean outdated images
-find $PWD/tmp -mtime +$(($screen_num + 3)) -exec rm {} \;
+find $TARGETDIR -mtime +$(($screen_num + 3)) -exec rm {} \;
