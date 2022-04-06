@@ -31,6 +31,14 @@ url=$(echo $apodjson | json_pp | grep -w url | awk -F '"' '{print $4}')
 apod_date=${date}
 epoch=$(date -j -f "%Y-%m-%d" $apod_date +%s)
 
+#remove characters that will cause script failure
+#echo $title
+#echo $explanation
+title=${title//[\\]}
+explanation=${explanation//[\\]}  
+echo $title
+echo $explanation
+    
 #try to set wallpaper to every screen, if some images are missing, set to the same apod as today.
 if [ $media_type == "video" ]; then
   #echo "Today is a video, will try to capture a video snapshot."
