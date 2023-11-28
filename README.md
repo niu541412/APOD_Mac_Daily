@@ -9,7 +9,10 @@ The scripts work by requesting the APOD API, extracting the location of the HD v
 
 You can edit your crontab file  (`crontab -e` in the terminal) to make this script work automatically and periodically. For example
 
-`#0 12 * * * /Users/username/Pictures/APOD_Mac_Daily/apod_daily.sh`
+```cron
+0 12 * * * /Users/username/Pictures/APOD_Mac_Daily/apod_daily.sh
+```
+
 
 ## REQUIREMENT
 MacOS
