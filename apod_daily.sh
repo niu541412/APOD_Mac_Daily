@@ -13,21 +13,21 @@ else
   TARGETDIR="$1"
 fi
 
-
 if [ ! -d "$TARGETDIR" ]; then
   mkdir $TARGETDIR
 fi
 
 apodjson=$(curl -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
-if [ x$apodjson == "x" ]; then
+if [[ "x$apodjson" == "x" ]]; then
   apodjson=$(curl -x 127.0.0.1:1080 -X GET "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
 fi
-date=$(echo $apodjson | json_pp | grep "\"date\"" | awk -F '"' '{print $4}')
-explanation=$(echo $apodjson | json_pp | grep "\"explanation\"" | awk -F '"' '{print $4}')
-title=$(echo $apodjson | json_pp | grep "\"title\"" | awk -F '"' '{print $4}')
-media_type=$(echo $apodjson | json_pp | grep "\"media_type\"" | awk -F '"' '{print $4}')
-hdurl=$(echo $apodjson | json_pp | grep "\"hdurl\"" | awk -F '"' '{print $4}')
-url=$(echo $apodjson | json_pp | grep -w "\"url\"" | awk -F '"' '{print $4}')
+
+date=$(echo -E $apodjson | json_pp | grep "\"date\"" | awk -F '"' '{print $4}')
+explanation=$(echo -E $apodjson | json_pp | grep "\"explanation\"" | awk -F '"' '{print $4}')
+title=$(echo -E $apodjson | json_pp | grep "\"title\"" | awk -F '"' '{print $4}')
+media_type=$(echo -E $apodjson | json_pp | grep "\"media_type\"" | awk -F '"' '{print $4}')
+hdurl=$(echo -E $apodjson | json_pp | grep "\"hdurl\"" | awk -F '"' '{print $4}')
+url=$(echo -E $apodjson | json_pp | grep -w "\"url\"" | awk -F '"' '{print $4}')
 apod_date=${date}
 epoch=$(date -j -f "%Y-%m-%d" $apod_date +%s)
 
@@ -35,17 +35,17 @@ epoch=$(date -j -f "%Y-%m-%d" $apod_date +%s)
 #echo $title
 #echo $explanation
 title=${title//[\\]}
-explanation=${explanation//[\\]}  
+explanation=${explanation//[\\]}
 echo $title
 echo $explanation
-    
+
 #try to set wallpaper to every screen, if some images are missing, set to the same apod as today.
-if [ $media_type == "video" ]; then
+if [[ $media_type == "video" ]]; then
   #echo "Today is a video, will try to capture a video snapshot."
   echo "Today is a video, please visit $url for more information."
   osascript -e "display notification \"Astronomy Picture of the Day\" with title \"Today is a video, please visit\" subtitle \"$url\" sound name \"Glass\""
   today_is_video=true
-elif [ $media_type == "image" ]; then
+elif [[ $media_type == "image" ]]; then
   curl -o $TARGETDIR/apod_${date}.jpg ${hdurl}
   echo "Today is an image, change the wallpaper."
   for ((i = 1; i <= ${screen_num}; i++)); do
