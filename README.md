@@ -13,6 +13,7 @@ You can edit your crontab file  (`crontab -e` in the terminal) to make this scri
 0 12 * * * /Users/username/Pictures/APOD_Mac_Daily/apod_daily.sh
 ```
 
+**NOTE**: Due to prermission issue, you may need to grant cron to accesss full disk in System Preferences as this [guide](https://apple.stackexchange.com/questions/402132?#answer-402179).
 
 ## REQUIREMENT
 MacOS
