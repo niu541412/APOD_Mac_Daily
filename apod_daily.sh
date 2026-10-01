@@ -43,7 +43,7 @@ fetch_data() {
 
 # Fetch and Parse APOD Data
 echo "Fetching APOD data..."
-APOD_JSON=$(fetch_data "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY")
+APOD_JSON=$(fetch_data "https://science.nasa.gov/wp-json/wp/v2/apod-basic/?api_key=DEMO_KEY")
 
 if [[ -z "$APOD_JSON" ]]; then
 	echo "Error: Failed to fetch APOD data. Check your connection/proxy."
@@ -53,7 +53,7 @@ fi
 # Parse JSON using JavaScript engine
 parse_json() {
 	local key=$1
-	osascript -l JavaScript -e "function run(argv) { return JSON.parse(argv[0]).$key; }" "$APOD_JSON"
+	osascript -l JavaScript -e "function run(argv) { return JSON.parse(argv[0])[0].$key; }" "$APOD_JSON"
 }
 
 DATE=$(parse_json "date")
