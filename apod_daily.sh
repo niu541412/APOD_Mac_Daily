@@ -56,6 +56,15 @@ parse_json() {
 	osascript -l JavaScript -e "function run(argv) { return JSON.parse(argv[0])[0].$key; }" "$APOD_JSON"
 }
 
+# Pass dynamic text as arguments so quotes in APOD content remain plain text.
+notify_apod() {
+	osascript \
+		-e 'on run argv' \
+		-e 'display notification (item 1 of argv) with title (item 2 of argv) subtitle (item 3 of argv) sound name "Glass"' \
+		-e 'end run' \
+		"$1" "$2" "$3"
+}
+
 DATE=$(parse_json "date")
 TITLE=$(parse_json "title")
 EXPLANATION=$(parse_json "explanation")
@@ -96,7 +105,7 @@ if [[ "$MEDIA_TYPE" == "video" ]]; then
 		MEDIA_TYPE="image"
 	else
 		echo "No thumbnail found for video: $URL"
-		osascript -e "display notification \"Today is a video (no thumb found).\" with title \"APOD: $TITLE\" subtitle \"$URL\" sound name \"Glass\""
+		notify_apod "Today is a video (no thumb found)." "APOD: $TITLE" "$URL"
 	fi
 fi
 if [[ "$MEDIA_TYPE" == "image" ]]; then
@@ -117,10 +126,14 @@ if [[ "$MEDIA_TYPE" == "image" ]]; then
 		[[ ! -f "$IMG_PATH" ]] && IMG_PATH="$TODAY_FILE"
 
 		echo "Screen $i -> $TARGET_DATE"
-		osascript -e "tell application \"System Events\" to set picture of desktop $i to POSIX file \"$IMG_PATH\""
+		osascript \
+			-e 'on run argv' \
+			-e 'tell application "System Events" to set picture of desktop (item 1 of argv as integer) to POSIX file (item 2 of argv)' \
+			-e 'end run' \
+			"$i" "$IMG_PATH"
 	done
 
-	osascript -e "display notification \"Astronomy Picture of the Day\" with title \"$TITLE\" subtitle \"$EXPLANATION\"  sound name \"Glass\""
+	notify_apod "Astronomy Picture of the Day" "$TITLE" "$EXPLANATION"
 elif [[ "$MEDIA_TYPE" == "video" ]]; then
 	: # Already handled in the video section above
 else
