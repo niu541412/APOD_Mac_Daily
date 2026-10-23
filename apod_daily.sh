@@ -70,6 +70,10 @@ TITLE=$(parse_json "title")
 EXPLANATION=$(parse_json "explanation")
 # APOD explanations contain HTML links; notifications should show their text only.
 EXPLANATION=$(printf '%s' "$EXPLANATION" | textutil -convert txt -stdin -stdout -format html)
+if [[ "$EXPLANATION" == Explanation:* ]]; then
+	EXPLANATION=${EXPLANATION#Explanation:}
+	EXPLANATION=${EXPLANATION# }
+fi
 MEDIA_TYPE=$(parse_json "media_type")
 HDURL=$(parse_json "hdurl")
 URL=$(parse_json "url")
