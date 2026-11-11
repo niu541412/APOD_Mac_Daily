@@ -69,7 +69,7 @@ DATE=$(parse_json "date")
 TITLE=$(parse_json "title")
 EXPLANATION=$(parse_json "explanation")
 # APOD explanations contain HTML links; notifications should show their text only.
-EXPLANATION=$(printf '%s' "$EXPLANATION" | textutil -convert txt -stdin -stdout -format html)
+EXPLANATION=$(printf '%s' "$EXPLANATION" | textutil -convert txt -stdin -stdout -format html -inputencoding UTF-8)
 if [[ "$EXPLANATION" == Explanation:* ]]; then
 	EXPLANATION=${EXPLANATION#Explanation:}
 	EXPLANATION=${EXPLANATION# }
